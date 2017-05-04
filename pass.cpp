@@ -298,7 +298,7 @@ std::string appendChar(std::string phonetic, char inChar){
 }
 
 int main(int argc, char* argv[]){
-	char randChar = 0;
+	int randChar = 0;
 	std::string phoneticPass = "";
 	std::fstream passText;
 	passText.open("pass.txt",std::fstream::out|std::fstream::trunc);
@@ -317,13 +317,14 @@ int main(int argc, char* argv[]){
 	for (int j = 0; j < numPass; j++){
 	for (int i = 0; i < 12; i++){
 		do {
-		randChar = (rand() * 331) % 93; // 331 is a big prime. clamp randChar to between 33 and 126 for typable ASCII.
+		randChar = (rand()) % 93; // 331 is a big prime. clamp randChar to between 33 and 126 for typable ASCII.
 		randChar += 33;
 		} while (randChar == 123 || randChar == 125 || randChar == 93 || randChar == 91 || randChar == 40 || randChar == 41); //Generate a new character if it's one of (){}[]
-		std::cout << randChar;
-		passText << randChar;
+
+		std::cout << (char)randChar;
+		passText << (char)randChar;
 		srand(rand() + clock());
-		phoneticPass = appendChar(phoneticPass, randChar);
+		phoneticPass = appendChar(phoneticPass, (char)randChar);
 	}
 	std::cout << "\n";
 	std::cout << phoneticPass << "\n\n";
