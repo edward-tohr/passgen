@@ -1,6 +1,6 @@
 # passgen
 Small password generator done in C++. Generates 12 random characters and outputs them.
-Random passwords will not contain spaces, parentheses, braces, or brackets.
+Random passwords will not contain spaces, parentheses (), braces {}, brackets [], or backslashes \.
 
 It'll also overwrite pass.txt with the output. See the example file in the repo for an example of output.
 
