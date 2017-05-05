@@ -29,9 +29,11 @@ int main(int argc, char* argv[]){
 	for (int j = 0; j < numPass; j++){
 	for (int i = 0; i < 12; i++){
 		do {
-		randChar = (rand()) % 93; // 331 is a big prime. clamp randChar to between 33 and 126 for typable ASCII.
+		randChar = (rand()) % 93; //clamp randChar to between 33 and 126 
 		randChar += 33;
-		} while (randChar == 123 || randChar == 125 || randChar == 93 || randChar == 91 || randChar == 40 || randChar == 41); //Generate a new character if it's one of (){}[]
+		} while (randChar == 123 || randChar == 125 || randChar == 93 || randChar
+    == 91 || randChar == 40 || randChar == 41 || randChar == 92); 
+    //Generate a new character if it's one of (){}[] or \
 
 		std::cout << (char)randChar;
 		passText << (char)randChar;
