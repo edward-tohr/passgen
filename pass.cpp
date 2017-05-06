@@ -11,17 +11,23 @@ static int PASS_MAX = 31;
 
 int main(int argc, char* argv[]){
 	int randChar = 0;
+  bool phoneticOutput = true;
 	std::string phoneticPass = "";
 	std::fstream passText;
 	passText.open("pass.txt",std::fstream::out|std::fstream::trunc);
 	int numPass = 5;
-	if (argc > 1){
-	try {
-	numPass = std::stoi(argv[1]);
-	}
-	catch (const std::invalid_argument& ia) {
-	  std::cerr << "Invalid argument: " << argv[1] << '\n';
-  } 
+  for (int i = 1; i < argc; i++) {
+    if (std::string(argv[i]) == "-s" || std::string(argv[i]) == "--script-output"){
+      numPass = 1;
+      phoneticOutput = false;
+    } else {
+  	try {
+      numPass = std::stoi(argv[i]);
+    }
+    catch (const std::invalid_argument& ia) {
+      std::cerr << "Invalid argument: " << argv[1] << '\n';
+    } 
+    }
   }
 	if (numPass < PASS_MIN){numPass = PASS_MIN;}
 	if (numPass > PASS_MAX){numPass = PASS_MAX;}
@@ -38,11 +44,15 @@ int main(int argc, char* argv[]){
 		std::cout << (char)randChar;
 		passText << (char)randChar;
 		srand(rand() + clock());
+    if (phoneticOutput){
 		phoneticPass = appendChar(phoneticPass, (char)randChar);
+    }
 	}
 	std::cout << "\n";
+  if (phoneticOutput) {
 	std::cout << phoneticPass << "\n\n";
 	passText << "\n" << phoneticPass << "\n\n";
+  }
 	phoneticPass.clear();
 	}
 	return 0;
